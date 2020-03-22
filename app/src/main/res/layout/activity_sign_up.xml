@@ -59,13 +59,7 @@
                 android:inputType="phone"
                 android:background="@drawable/shape"/>
 
-            <EditText
-                android:id="@+id/txtReg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:hint="@string/reg_no"
-                android:background="@drawable/shape"/>
+
     </LinearLayout>
     </LinearLayout>
     </ScrollView>

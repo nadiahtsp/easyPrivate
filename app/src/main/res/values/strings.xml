@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">easy private</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="email">Email</string>
+    <string name="name">Nama</string>
+    <string name="mobno">No Telefon</string>
+    <string name="reg_no">Negara</string>
+</resources>

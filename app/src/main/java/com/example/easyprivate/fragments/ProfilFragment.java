@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.easyprivate.MainActivity;
+import com.example.easyprivate.SignInActivity;
 import com.example.easyprivate.R;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -70,7 +70,7 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(mContext, "Sign out successful", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(mContext, MainActivity.class);
+                Intent i = new Intent(mContext, SignInActivity.class);
                 mContext.startActivity(i);
                 getActivity().finish();
             }

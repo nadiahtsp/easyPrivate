@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".PemesananActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hi,"
+            android:layout_marginTop="50dp"
+            android:textSize="40sp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mau belajar apa hari ini?"
+            android:textSize="25sp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Form Pendaftaran Les Privat"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center_horizontal"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Nama"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/namaMuridET"
+                android:textColor="@color/fontDark"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Jenjang"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <Spinner
+                android:id="@+id/spinner_jenjang"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/shape"
+                />
+            <TextView
+                android:id="@+id/kelasTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Kelas"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <Spinner
+                android:id="@+id/spinner_kelas"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                />
+            <TextView
+                android:id="@+id/mapelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Mata Pelajaran"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <Spinner
+                android:id="@+id/spinner_mapel"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Jenis Kelamin Guru"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <Spinner
+                android:id="@+id/spinner_jeniskelaminguru"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Tanggal pertemuan Pertama"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/tanggalPertemuanET"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/shape"
+                android:editable="false"
+                android:hint="dd/MM/yyyy"
+                android:textSize="17sp" />
+            <TextView
+                android:layout_marginBottom="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Pilih Hari Les Kamu Setiap Minggu"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+            <CheckBox
+                android:id="@+id/cbSenin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Senin"
+                />
+            <CheckBox
+                android:id="@+id/cbSelasa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selasa"
+                />
+            <CheckBox
+                android:id="@+id/cbRabu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rabu"
+                />
+            <CheckBox
+                android:id="@+id/cbKamis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kamis"
+                />
+            <CheckBox
+                android:id="@+id/cbJumat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumat"
+                />
+            <CheckBox
+                android:id="@+id/cbSabtu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sabtu"
+                />
+            <CheckBox
+                android:id="@+id/cbMinggu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Minggu"
+                />
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:text="Search"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

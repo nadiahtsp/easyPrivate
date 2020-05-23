@@ -3,7 +3,7 @@
     <!--  Default  -->
     <color name="colorPrimary">#007DD3</color>
     <color name="colorPrimaryDark">#004979</color>
-    <color name="colorAccent">#FFD700</color>
+    <color name="colorAccent">#007DD3</color>
 
     <!--  Background  -->
     <color name="white">#FFFFFF</color>

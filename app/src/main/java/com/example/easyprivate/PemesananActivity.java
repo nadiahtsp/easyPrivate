@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
 import com.example.easyprivate.model.Jenjang;
 import com.example.easyprivate.model.MataPelajaran;
+import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
 import com.google.android.gms.common.api.Api;
 
@@ -40,30 +44,38 @@ public class PemesananActivity extends AppCompatActivity {
     Spinner jenjangSP,kelasSP,mapelSP,jenis_kelaminSP;
     CheckBox senin,selasa,rabu,kamis,jumat,sabtu,minggu;
     ArrayList<Jenjang> jenjangAL;
+    Button btnCari;
+    User user;
+    CustomUtility cu;
+    UserHelper uh;
     ArrayList<MataPelajaran> mapelAL;
     private Integer id_mapel = null;
 
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface= rci.getApiInterface();
+    private static final String TAG = "PemesananActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pemesanan);
         init();
-        tanggal_pertemuan.setOnClickListener(new View.OnClickListener() {
+
+        btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDate();
+                callPemesanan();
             }
         });
+
         callJenjang();
         getJenisKelamin();
+
+
     }
 
     private void init(){
         nama = findViewById(R.id.namaMuridET);
-        tanggal_pertemuan = findViewById(R.id.tanggalPertemuanET);
         jenjangSP = findViewById(R.id.spinner_jenjang);
         kelasSP = findViewById(R.id.spinner_kelas);
         mapelSP = findViewById(R.id.spinner_mapel);
@@ -75,6 +87,11 @@ public class PemesananActivity extends AppCompatActivity {
         jumat = findViewById(R.id.cbJumat);
         sabtu = findViewById(R.id.cbSabtu);
         minggu = findViewById(R.id.cbMinggu);
+        cu = new CustomUtility(this);
+        btnCari = findViewById(R.id.btnCari);
+        uh= new UserHelper(this);
+        user = uh.retrieveUser();
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     private void showDate(){
@@ -242,8 +259,10 @@ public class PemesananActivity extends AppCompatActivity {
 
     private void getJenisKelamin(){
         List<String> jenisKelaminAr = new ArrayList<>();
-        jenisKelaminAr.add("Perempuan");
-        jenisKelaminAr.add("Laki-Laki");
+        jenisKelaminAr.add("-");
+        jenisKelaminAr.add("perempuan");
+        jenisKelaminAr.add("laki-laki");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,android.R.layout.simple_spinner_item, jenisKelaminAr);
@@ -265,49 +284,44 @@ public class PemesananActivity extends AppCompatActivity {
     }
 
     private void callPemesanan(){
+        ArrayList<String> hari = new ArrayList<>();
         String seninStr= null, selasaStr = null, rabuStr = null, kamisStr = null, jumatStr = null, sabtuStr= null, mingguStr=null;
         if(senin.isChecked()){
-            seninStr = "senin";
+            hari.add("senin");
         }
         if(selasa.isChecked()){
-            selasaStr = "selasa";
+            hari.add("selasa");
         }
         if(rabu.isChecked()){
-            rabuStr = "rabu";
+            hari.add("rabu");
         }
         if(kamis.isChecked()){
-            kamisStr = "kamis";
+            hari.add("kamis");
         }
         if(jumat.isChecked()){
-            jumatStr = "jumat";
+            hari.add("jumat");
         }
         if(sabtu.isChecked()){
-            sabtuStr = "sabtu";
+            hari.add("sabtu");
         }
         if(minggu.isChecked()){
-            mingguStr = "minggu";
+            hari.add("minggu");
         }
-        Call<ArrayList<User>> call = apiInterface.cariGuru(id_mapel,
-                jenis_kelaminSP.getSelectedItem().toString(),
-                seninStr,
-                selasaStr,
-                rabuStr,
-                kamisStr,
-                jumatStr,
-                sabtuStr,
-                mingguStr
-                );
-        call.enqueue(new Callback<ArrayList<User>>() {
-            @Override
-            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
-            }
+        Integer kelasInt = Integer.parseInt(kelasSP.getSelectedItem().toString());
 
-            @Override
-            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+        Pemesanan pemesanan = new Pemesanan();
+        pemesanan.setIdMurid(user.getId());
+        pemesanan.setIdMapel(id_mapel);
+        pemesanan.setKelas(kelasInt);
+        uh.storePemesanan(pemesanan);
 
-            }
-        });
+        Intent i = new Intent(PemesananActivity.this, HasilPencarianActivity.class);
+        i.putExtra("hari",hari);
+        i.putExtra("id_mapel",id_mapel);
+        i.putExtra("jenisKelaminStr",jenis_kelaminSP.getSelectedItem().toString());
+        Log.d(TAG, "callPemesanan: jka :"+ jenis_kelaminSP.getSelectedItem().toString());
+        startActivity(i);
     }
 
 }

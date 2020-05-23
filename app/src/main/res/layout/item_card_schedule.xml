@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin2">
+<TextView
+    android:id="@+id/hariTV"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_muda"
+    android:text="Senin"
+    android:padding="7dp"
+    android:textColor="@color/white"
+    android:textSize="16sp"
+    android:gravity="center_vertical"
+    />
+    <TextView
+        android:id="@+id/jamTV"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09.00 - 12.00"
+        android:textColor="@color/fontDark"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        />
+</LinearLayout>

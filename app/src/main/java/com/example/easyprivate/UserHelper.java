@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
 import com.example.easyprivate.model.Absen;
+import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
 import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
@@ -24,6 +25,8 @@ public class UserHelper {
 
     private static final String TAG_USER = "currUser";
     private static final String TAG_PREF = "currPref";
+    private static final String TAG_PEMESANAN = "currPemesanan";
+
 
     public UserHelper(Context mContext) {
         this.mContext = mContext;
@@ -112,5 +115,35 @@ public class UserHelper {
 
     public static String getPrefTag() {
         return TAG_PREF;
+    }
+
+    public void storePemesanan(Pemesanan pesanan){
+        String jsonStr = new Gson().toJson(pesanan);
+
+        SharedPreferences.Editor editor = preferences.edit();
+
+        removeUser();
+        editor.putString(TAG_PEMESANAN, jsonStr);
+        editor.commit();
+    }
+
+    public Pemesanan retrievePemesanan(){
+        Gson gson = new Gson();
+        String json = preferences.getString(TAG_PEMESANAN, "");
+        try {
+            Pemesanan pesanan = gson.fromJson(json, Pemesanan.class);
+            return pesanan;
+        }catch (Throwable t){
+            Log.d(TAG, "retrievePemesanan: "+t.getMessage());
+            return null;
+        }
+    }
+
+    public void removePemesanan(){
+        if (retrievePemesanan() != null){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove(TAG_PEMESANAN);
+            editor.commit();
+        }
     }
 }

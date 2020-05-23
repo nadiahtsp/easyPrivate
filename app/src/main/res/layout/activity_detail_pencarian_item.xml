@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:layout_height="match_parent"
+    tools:context=".DetailPencarianItem">
+
+    <ScrollView
+        android:id="@+id/SCdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonBelajar"
+        android:layout_alignParentTop="true"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civProfilePic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/account_default"
+            app:civ_border_width="4dp"
+            android:layout_gravity="center_horizontal"
+            app:civ_border_color="@color/white"
+            android:layout_marginTop="@dimen/margin2"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/namaTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontDark"
+            android:text="Nadiah"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:id="@+id/jenis_kelaminTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontDark"
+            android:text="Perempuan"
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/universitas"
+                android:tint="@color/blue"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/universitasTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Universitas Indonesia"
+                android:textColor="@color/fontDark"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/location"
+                android:tint="@color/blue"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Jakarta"
+                android:textColor="@color/fontDark"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="@color/blue"
+                android:src="@drawable/date"
+                android:layout_gravity="center_vertical"
+                >
+            </ImageView>
+            <LinearLayout
+                android:id="@+id/LLtgl_pertemuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+               android:layout_marginLeft="@dimen/margin2"
+                >
+                <TextView
+                    android:textColor="@color/fontDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+
+                    android:text="Pilih Tanggal Pertemuan Pertama"
+                    >
+                </TextView>
+                <Spinner
+                    android:id="@+id/spinnerTgl"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_access_time_black_24dp"
+                android:tint="@color/blue"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin2"
+                android:text="Pilih Jam Belajar Les"
+                android:textColor="@color/fontDark"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="30dp"
+            android:id="@+id/LLjadwal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            >
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>
+
+    <Button
+        android:id="@+id/buttonBelajar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Belajar dengan Guru"
+        android:background="@drawable/button_muda"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        />
+</RelativeLayout>

@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout android:id="@+id/itemLL"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="20dp"
+    android:padding="@dimen/margin2"
+    android:background="@drawable/shape"
     android:layout_marginTop="10dp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="match_parent"
+    android:layout_gravity="center"
     android:layout_height="wrap_content"
     android:layout_weight="3"
     >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/fotoCIV"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"
+        android:gravity="center_horizontal"
+        android:src="@drawable/account_default"
+        android:layout_width="70dp"
+        android:layout_height="70dp"/>
 </LinearLayout>
+
     <LinearLayout
+        android:layout_marginLeft="@dimen/margin2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        >
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
         <TextView
+            android:id="@+id/namaTV"
             android:layout_width="match_parent"
+            android:textColor="@color/fontDark"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/jenis_kelaminTV"
+            android:layout_width="match_parent"
+            android:textColor="@color/fontDark"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/locationTV"
+            android:layout_width="match_parent"
+            android:textColor="@color/fontDark"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/jarakTV"
+            android:layout_width="match_parent"
+            android:textColor="@color/fontDark"
+            android:layout_height="wrap_content"/>
+
 </LinearLayout>
 </LinearLayout>

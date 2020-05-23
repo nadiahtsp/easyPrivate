@@ -75,7 +75,6 @@
                 android:id="@+id/spinner_jenjang"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/shape"
                 />
             <TextView
                 android:id="@+id/kelasTV"
@@ -120,22 +119,7 @@
                 android:layout_height="55dp"
                 android:paddingLeft="10dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:text="Tanggal pertemuan Pertama"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp" />
 
-            <EditText
-                android:id="@+id/tanggalPertemuanET"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/shape"
-                android:editable="false"
-                android:hint="dd/MM/yyyy"
-                android:textSize="17sp" />
             <TextView
                 android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
@@ -187,7 +171,7 @@
                 android:text="Minggu"
                 />
             <Button
-                android:id="@+id/btnSearch"
+                android:id="@+id/btnCari"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -26,4 +26,6 @@
     <color name="fontLight">#DDDDDD</color>
     <color name="fontDark">#2C2C2C</color>
 
+    <color name="gray">#546E7A</color>
+
 </resources>

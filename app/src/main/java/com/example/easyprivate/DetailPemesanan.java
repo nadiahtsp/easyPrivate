@@ -28,8 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailPemesanan extends AppCompatActivity {
-    TextView namaTV, jkTV, uniTV, lokasiTV,tglTV;
+    TextView namaTV, jkTV, uniTV, lokasiTV,tglTV,statusTV;
     CustomUtility cu;
+    Button selesaiTV;
     LinearLayout jadwalLL;
     CircleImageView fotoCIV;
     private RetrofitClientInstance rci = new RetrofitClientInstance();
@@ -55,6 +56,8 @@ public class DetailPemesanan extends AppCompatActivity {
         tglTV = findViewById(R.id.tglTV);
         uniTV = findViewById(R.id.universitasTV);
         jadwalLL =findViewById(R.id.TVjadwal);
+        statusTV=findViewById(R.id.statusTV);
+        selesaiTV=findViewById(R.id.selesai);
     }
 
     public void getPemesanan(Pemesanan pemesanan){
@@ -74,9 +77,10 @@ public class DetailPemesanan extends AppCompatActivity {
         result = sb.toString();
 
         lokasiTV.setText(result);
-        String tglPertemuanPertama = cu.reformatDateTime(pemesanan.getFirstMeet(),"yyyy-MM-dd HH:mm:ss","EEEE - dd MMMM yyyy");
-        tglTV.setText(tglPertemuanPertama);
-
+        if (pemesanan.getFirstMeet() != null) {
+            String tglPertemuanPertama = cu.reformatDateTime(pemesanan.getFirstMeet(), "yyyy-MM-dd HH:mm:ss", "EEEE - dd MMMM yyyy");
+            tglTV.setText(tglPertemuanPertama);
+        }
         for(int i=0; i< pesanan.getJadwalPemesananPerminggu().size(); i++){
             JadwalAvailable ja = pesanan.getJadwalPemesananPerminggu().get(i).getJadwalAvailable();
 
@@ -94,6 +98,31 @@ public class DetailPemesanan extends AppCompatActivity {
 
             jamTv.setText(start + " - " +end);
             jadwalLL.addView(v);
+
+            switch(pemesanan.getStatus()){
+                case 0:
+                    statusTV.setText("Menunggu Konfirmasi");
+                    statusTV.setTextColor(DetailPemesanan.this.getResources().getColor(R.color.white));
+                    statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.yellow));
+                    break;
+                case 1:
+                   statusTV.setText("Pemesanan Diterima");
+                    statusTV.setTextColor(DetailPemesanan.this.getResources().getColor(R.color.white));
+                    statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.green));
+                    selesaiTV.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    statusTV.setText("Pemesanan Ditolak");
+                    statusTV.setTextColor(DetailPemesanan.this.getResources().getColor(R.color.white));
+                    statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.red));
+                    break;
+                case 3:
+                    statusTV.setText("Pemesanan Selesai");
+                    statusTV.setTextColor(DetailPemesanan.this.getResources().getColor(R.color.white));
+                    statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.gray));
+                    break;
+            }
+
         }
     }
 

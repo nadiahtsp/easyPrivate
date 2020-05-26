@@ -89,7 +89,7 @@ public interface ApiInterface {
     );
     @FormUrlEncoded
     @POST("pemesanan/filter")
-    Call<Pemesanan> pemesananFilter(
+    Call<ArrayList<Pemesanan>> pemesananFilter(
             @Field("id_pemesanan") Integer id_pemesanan,
             @Field("id_murid") Integer id_murid,
             @Field("id_guru") Integer id_guru,

@@ -254,18 +254,18 @@ public class DetailPencarianItem extends AppCompatActivity {
             Log.d(TAG, "getTglPertemuan: hari string "+hariStr);
         }
 
-
-        for(int i = 0; i < hariIntAr.size(); i ++) {
-            Log.d(TAG, "getTglPertemuan: index tgl : " + i);
-            Calendar calendar = Calendar.getInstance();
-            long dateLong = calendar.getTimeInMillis();
-            long limitLong = dateLong + (14 * 24 * 60 * 60 * 1000);
+        Calendar calendar = Calendar.getInstance();
+        long dateLong = calendar.getTimeInMillis();
+        long limitLong = dateLong + (14 * 24 * 60 * 60 * 1000);
+        while (dateLong <= limitLong) {
+            dateLong += (24 * 60 * 60 * 1000);
+            calendar.setTimeInMillis(dateLong);
+            Log.d(TAG, "getTglPertemuan: date long "+dateLong);
             //Hari yang sedang di looping
-            Integer currHari = hariIntAr.get(i);
-            while (dateLong <= limitLong) {
-                Log.d(TAG, "getTglPertemuan: date long "+dateLong);
-                dateLong += (24 * 60 * 60 * 1000);
-                calendar.setTimeInMillis(dateLong);
+            for(int i = 0; i < hariIntAr.size(); i ++) {
+                Log.d(TAG, "getTglPertemuan: index tgl : " + i);
+                Integer currHari = hariIntAr.get(i);
+
                 if (calendar.get(Calendar.DAY_OF_WEEK) == currHari) {
                     Log.d(TAG, "getTglPertemuan: curr hari = day of week " +currHari);
                     String dateStr = sdf.format(calendar.getTime());

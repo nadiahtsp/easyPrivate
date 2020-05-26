@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
-    android:padding="@dimen/padding1">
+    android:background="@color/blue">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_alignParentTop="true"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pesanan"
-        android:textColor="@color/white"
-        android:textSize="@dimen/header1"
-        android:layout_margin="@dimen/margin2"/>
+        android:orientation="vertical"
+        android:padding="@dimen/margin1"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Riwayat Pemesanan"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPesanan"
-        android:layout_below="@id/title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin2"/>
+    </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

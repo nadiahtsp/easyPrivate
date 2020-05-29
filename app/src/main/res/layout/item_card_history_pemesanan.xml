@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/itemLL"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shape"
-    android:padding="@dimen/margin1"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_white"
+    android:padding="@dimen/margin2"
+    android:layout_marginBottom="@dimen/margin1"
+    android:orientation="vertical"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/fotoCIV"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/account_default"
@@ -16,7 +26,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/margin2"
-
         >
+        <TextView
+            android:id="@+id/namaTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Juan"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/jenis_kelaminTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perempuan"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/mapelTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Matematika"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/lokasiTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jakarta"
+            android:textSize="16sp"/>
+
     </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/statusTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blueLight"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:text="Peesanan Status"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
 </LinearLayout>

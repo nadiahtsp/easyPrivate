@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,12 +26,15 @@ public class HasilPencarianActivity extends AppCompatActivity {
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface= rci.getApiInterface();
     private Intent currIntent;
+    public static Activity hasilPencarian;
+    private UserHelper uh;
     private static final String TAG = "HasilPencarianActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hasil_pencarian);
+        hasilPencarian = this;
 
         init();
         callCariGuru();
@@ -38,8 +42,16 @@ public class HasilPencarianActivity extends AppCompatActivity {
 
     private void init(){
         rvList = findViewById(R.id.rv_item_cari);
-        currIntent = getIntent();
-
+        if(currIntent==null) {
+            currIntent = getIntent();
+        }
+        uh = new UserHelper(this);
+        if (uh.retrieveUser()==null){
+            Log.d(TAG, "init: user = null");
+        }
+        if (uh == null){
+            Log.d(TAG, "init: user helper = null");
+        }
     }
 
     private void callCariGuru(){
@@ -48,9 +60,6 @@ public class HasilPencarianActivity extends AppCompatActivity {
             id_mapelInt =null;
         }
         ArrayList<String> hari = currIntent.getStringArrayListExtra("hari");
-
-
-
 
         String jk = "";
         if ( !currIntent.getStringExtra("jenisKelaminStr").equals("-") ){

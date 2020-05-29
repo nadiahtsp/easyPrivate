@@ -46,6 +46,7 @@ public class UserHelper {
     public User retrieveUser(){
         Gson gson = new Gson();
         String json = preferences.getString(TAG_USER, "");
+        Log.d(TAG, "retrieveUser: json = "+json);
         try {
             User u = gson.fromJson(json, User.class);
             return u;
@@ -122,7 +123,7 @@ public class UserHelper {
 
         SharedPreferences.Editor editor = preferences.edit();
 
-        removeUser();
+        removePemesanan();
         editor.putString(TAG_PEMESANAN, jsonStr);
         editor.commit();
     }

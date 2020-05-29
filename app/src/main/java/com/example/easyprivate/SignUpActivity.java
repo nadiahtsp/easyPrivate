@@ -159,7 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
         alamat = findViewById(R.id.alamat);
         jenis_kelamin = findViewById(R.id.jenisKelaminRGroup);
         simpan = findViewById(R.id.btnSimpan);
-//        set_alamat = findViewById(R.id.setAlamat);
+//       set_alamat = findViewById(R.id.setAlamat);
 
     }
 //    private void showMaps(){
@@ -272,6 +272,9 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     Log.d(TAG, "onResponse: "+response.message());
+                    if(!response.isSuccessful()){
+                        return;
+                    }
                     Intent mAccount = new Intent(SignUpActivity.this, MainNavigation.class);
                     User user = response.body();
                     UserHelper uh = new UserHelper(SignUpActivity.this);

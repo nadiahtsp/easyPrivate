@@ -3,8 +3,9 @@
     android:id="@+id/itemLL"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape"
-    android:padding="@dimen/margin1"
+    android:background="@drawable/button_white"
+    android:padding="@dimen/margin2"
+    android:layout_marginBottom="@dimen/margin1"
     android:orientation="vertical"
     >
     <LinearLayout

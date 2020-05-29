@@ -2,19 +2,25 @@ package com.example.easyprivate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
+import com.example.easyprivate.fragments.PesananFragment;
 import com.example.easyprivate.model.JadwalAvailable;
 import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
@@ -37,6 +43,7 @@ public class DetailPemesanan extends AppCompatActivity {
     private ApiInterface apiInterface = rci.getApiInterface();
     private Geocoder geocoder;
     private Pemesanan pesanan;
+    private static final String TAG = "DetailPemesanan";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +51,7 @@ public class DetailPemesanan extends AppCompatActivity {
         int idPemesanan = getIntent().getIntExtra("id_pemesanan",0);
         init();
         getDetailPemesanan(idPemesanan);
+
     }
 
     public void init() {
@@ -58,6 +66,46 @@ public class DetailPemesanan extends AppCompatActivity {
         jadwalLL =findViewById(R.id.TVjadwal);
         statusTV=findViewById(R.id.statusTV);
         selesaiTV=findViewById(R.id.selesai);
+    }
+
+    public void showAlert(){
+        AlertDialog ad = new AlertDialog.Builder(DetailPemesanan.this ).create();
+        ad.setTitle("Anda Telah Memesan Guru "+pesanan.getGuru().getName());
+        ad.setMessage("Mohon Menunggu Konfirmasi Guru");
+        ad.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int j) {
+                dialogInterface.dismiss();
+
+            }
+        });
+        ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                dialogInterface.dismiss();
+            }
+        });
+        ad.show();
+    }
+
+    public void showDialog(){
+        AlertDialog ad = new AlertDialog.Builder(this).create();
+        ad.setTitle("Akhiri Pemesanan");
+        ad.setMessage("Apakah Anda Yakin Mengakhiri Pemesanan dengan Guru "+pesanan.getGuru().getName()+" ?");
+        ad.setButton(DialogInterface.BUTTON_POSITIVE, "Akhiri", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                callUpdatePemesanan();
+                finish();
+            }
+        });
+        ad.setButton(DialogInterface.BUTTON_NEGATIVE, "Kembali", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        ad.show();
     }
 
     public void getPemesanan(Pemesanan pemesanan){
@@ -106,9 +154,7 @@ public class DetailPemesanan extends AppCompatActivity {
                     statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.yellow));
                     break;
                 case 1:
-                   statusTV.setText("Pemesanan Diterima");
-                    statusTV.setTextColor(DetailPemesanan.this.getResources().getColor(R.color.white));
-                    statusTV.setBackgroundColor(DetailPemesanan.this.getResources().getColor(R.color.green));
+                    statusTV.setVisibility(View.GONE);
                     selesaiTV.setVisibility(View.VISIBLE);
                     break;
                 case 2:
@@ -126,6 +172,7 @@ public class DetailPemesanan extends AppCompatActivity {
         }
     }
 
+
     public void getDetailPemesanan(int id) {
         Call<Pemesanan> detailPemesanan = apiInterface.detailPemesanan(id);
         ProgressDialog p = rci.getProgressDialog(this, "Menampilkan detail pemesanan");
@@ -139,6 +186,21 @@ public class DetailPemesanan extends AppCompatActivity {
                 }
                 pesanan = response.body();
                 getPemesanan(pesanan);
+
+                if(getIntent().hasExtra("alert_dialog")){
+                    if (getIntent().getBooleanExtra("alert_dialog",false)){
+                        showAlert();
+                        PemesananActivity.pemesananActivity.finish();
+                        HasilPencarianActivity.hasilPencarian.finish();
+                    }
+                }
+
+                selesaiTV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showDialog();
+                    }
+                });
             }
 
             @Override
@@ -147,5 +209,24 @@ public class DetailPemesanan extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void callUpdatePemesanan(){
+        Call<Pemesanan> updatePemesanan = apiInterface.pemesananUpdate(pesanan.getIdPemesanan(),3);
+        updatePemesanan.enqueue(new Callback<Pemesanan>() {
+            @Override
+            public void onResponse(Call<Pemesanan> call, Response<Pemesanan> response) {
+                Log.d(TAG, "onResponse: "+response.message());
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                pesanan = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<Pemesanan> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
     }
 }

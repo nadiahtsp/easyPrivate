@@ -2,6 +2,7 @@ package com.example.easyprivate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class PemesananActivity extends AppCompatActivity {
     UserHelper uh;
     ArrayList<MataPelajaran> mapelAL;
     private Integer id_mapel = null;
+    public static Activity pemesananActivity;
 
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface= rci.getApiInterface();
@@ -59,6 +61,7 @@ public class PemesananActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pemesanan);
+        pemesananActivity = this;
         init();
 
         btnCari.setOnClickListener(new View.OnClickListener() {

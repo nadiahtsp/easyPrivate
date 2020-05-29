@@ -3,7 +3,9 @@ package com.example.easyprivate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
@@ -340,11 +342,11 @@ public class DetailPencarianItem extends AppCompatActivity {
 
                     return;
                 }
-                Toast.makeText(DetailPencarianItem.this,"Anda Telah Memesan Guru "+user.getName(),Toast.LENGTH_LONG).show();
                 Intent i = new Intent(DetailPencarianItem.this, DetailPemesanan.class);
                 i.putExtra("id_pemesanan",response.body().getIdPemesanan());
+                i.putExtra("alert_dialog",true);
                 startActivity(i);
-
+                finish();
             }
 
             @Override

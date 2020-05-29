@@ -19,6 +19,7 @@ import com.example.easyprivate.adapter.PemesananAdapter;
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
 import com.example.easyprivate.model.Pemesanan;
+import com.example.easyprivate.model.User;
 
 import java.util.ArrayList;
 
@@ -31,16 +32,40 @@ public class PesananFragment extends Fragment {
     ArrayList<Pemesanan> pemesananAL =new ArrayList<>();
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface= rci.getApiInterface();
+    private View v;
+    private User user;
     UserHelper uh;
     Context mContext;
+//    private boolean hasBeenRefreshed = true;
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(hasBeenRefreshed == false){
+//            pemesananAL.clear();
+//            rvList.setAdapter(null);
+//
+//            callPemesan();
+//            hasBeenRefreshed = true;
+//        }
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        hasBeenRefreshed = false;
+//    }
     private static final String TAG = "PesananFragment";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_pesanan, container, false);
+         v = inflater.inflate(R.layout.fragment_pesanan, container, false);
         mContext = v.getContext();
-
+        if(mContext==null){
+            Log.d(TAG, "onCreateView: contex = null");
+        }
+        
         init(v);
         callPemesan();
         return v;
@@ -49,11 +74,19 @@ public class PesananFragment extends Fragment {
     private void init(View v){
         rvList = v.findViewById(R.id.rvList);
         uh = new UserHelper(mContext);
+        if (uh == null){
+            Log.d(TAG, "init: user helper = null");
+        }
+        if (uh.retrieveUser()==null){
+            Log.d(TAG, "init: user = null");
+            
+        }
+        user = uh.retrieveUser();
     }
 
     public void callPemesan(){
         Call<ArrayList<Pemesanan>> cPemesanan = apiInterface.pemesananFilter(null,
-                uh.retrieveUser().getId(),
+                user.getId(),
                 null,
                 null);
         cPemesanan.enqueue(new Callback<ArrayList<Pemesanan>>() {

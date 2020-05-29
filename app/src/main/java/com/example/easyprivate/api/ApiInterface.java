@@ -95,4 +95,11 @@ public interface ApiInterface {
             @Field("id_guru") Integer id_guru,
             @Field("status") Integer status
     );
+
+    @FormUrlEncoded
+    @POST("pemesanan/update")
+    Call<Pemesanan> pemesananUpdate(
+            @Field("id_pemesanan") Integer id_pemesanan,
+            @Field("status") Integer status
+    );
 }

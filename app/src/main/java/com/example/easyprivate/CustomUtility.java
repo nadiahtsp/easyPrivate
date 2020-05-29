@@ -1,6 +1,7 @@
 package com.example.easyprivate;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
@@ -9,7 +10,12 @@ import android.util.Log;
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
 import com.example.easyprivate.model.Absen;
+import com.example.easyprivate.model.Pemesanan;
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +27,9 @@ import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
 
 public class CustomUtility {
     private Context mContext;
@@ -47,6 +56,31 @@ public class CustomUtility {
         return null;
     }
 
+    public Bitmap encodeToQrCode(String s, Integer qrSize){
+        BitMatrix bitMatrix;
+        try {
+            bitMatrix = new MultiFormatWriter().encode(s, BarcodeFormat.QR_CODE, qrSize, qrSize, null);
+        }catch(WriterException e){
+            Log.d(TAG, "encodeBitmap: "+e.getMessage());
+            return null;
+        }
+
+        int w = bitMatrix.getWidth(), h = bitMatrix.getHeight();
+        int[] pixels = new int[w*h];
+
+        for(int y = 0; y<h; y++){
+            int offset = y*w;
+            for (int x = 0; x<w; x++){
+                pixels[offset + x] = bitMatrix.get(x, y)? BLACK : WHITE;
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, qrSize, 0,0,w,h);
+
+        return bitmap;
+    }
+
     public String reformatDateTime(String dateTimeStr, String beforePattern, String afterPattern){
         SimpleDateFormat sdf = new SimpleDateFormat(beforePattern);
         try{
@@ -71,6 +105,11 @@ public class CustomUtility {
             Log.d(TAG, "jsonToAbsen: "+t.getMessage());
             return null;
         }
+    }
+
+    public String pemesananToJson(Pemesanan pemesanan){
+        String jsonStr = new Gson().toJson(pemesanan);
+        return jsonStr;
     }
 
     public void putIntoImage(String avatarStr, CircleImageView civ){

@@ -36,25 +36,25 @@ public class PesananFragment extends Fragment {
     private User user;
     UserHelper uh;
     Context mContext;
-//    private boolean hasBeenRefreshed = true;
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if(hasBeenRefreshed == false){
-//            pemesananAL.clear();
-//            rvList.setAdapter(null);
-//
-//            callPemesan();
-//            hasBeenRefreshed = true;
-//        }
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        hasBeenRefreshed = false;
-//    }
+    private boolean hasBeenRefreshed = true;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(hasBeenRefreshed == false){
+            pemesananAL.clear();
+            rvList.setAdapter(null);
+
+            callPemesan();
+            hasBeenRefreshed = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        hasBeenRefreshed = false;
+    }
     private static final String TAG = "PesananFragment";
 
     @Nullable

@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.easyprivate.JadwalActivity;
+import com.example.easyprivate.MapelActivity;
 import com.example.easyprivate.PemesananActivity;
 import com.example.easyprivate.R;
 
@@ -30,6 +32,20 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mContext, PemesananActivity.class);
+                mContext.startActivity(i);
+            }
+        });
+        jadwal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, JadwalActivity.class);
+                mContext.startActivity(i);
+            }
+        });
+        guru_saya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, MapelActivity.class);
                 mContext.startActivity(i);
             }
         });

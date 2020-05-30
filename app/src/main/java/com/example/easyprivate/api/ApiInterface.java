@@ -1,6 +1,7 @@
 package com.example.easyprivate.api;
 
 import com.example.easyprivate.model.JadwalAvailable;
+import com.example.easyprivate.model.JadwalPemesananPerminggu;
 import com.example.easyprivate.model.Jenjang;
 import com.example.easyprivate.model.MataPelajaran;
 import com.example.easyprivate.model.Pemesanan;
@@ -102,4 +103,17 @@ public interface ApiInterface {
             @Field("id_pemesanan") Integer id_pemesanan,
             @Field("status") Integer status
     );
+    @GET("pemesanan/jadwal/{id}")
+    Call<JadwalPemesananPerminggu> jadwalPermingguById(
+            @Path("id") int idJadwalPerminggu
+    );
+    @FormUrlEncoded
+    @POST("pemesanan/jadwal/filter")
+    Call<ArrayList<JadwalPemesananPerminggu>> jadwalPermingguByFilter(
+            @Field("id_pemesanan") Integer id_pemesanan,
+            @Field("id_guru") Integer id_guru,
+            @Field("id_murid") Integer id_murid,
+            @Field("status_pemesanan") Integer status
+    );
+
 }

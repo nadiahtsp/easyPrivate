@@ -17,6 +17,9 @@ public class JadwalPemesananPerminggu {
     @SerializedName("id_jadwal_pemesanan_perminggu")
     private int idJadwalPemesananPerminggu;
     @Expose
+    @SerializedName("pemesanan")
+    private Pemesanan pemesanan;
+    @Expose
     @SerializedName("id_event")
     private int idEvent;
 
@@ -26,6 +29,14 @@ public class JadwalPemesananPerminggu {
 
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
+    }
+
+    public Pemesanan getPemesanan() {
+        return pemesanan;
+    }
+
+    public void setPemesanan(Pemesanan pemesanan) {
+        this.pemesanan = pemesanan;
     }
 
     public JadwalAvailable getJadwalAvailable() {

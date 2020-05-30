@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".JadwalActivity"></activity>
+        <activity android:name=".MapelActivity"></activity>
+        <activity android:name=".JadwalActivity" />
         <activity android:name=".HistoryPemesanan" />
         <activity android:name=".DetailPemesanan" />
         <activity android:name=".DetailPencarianItem" />
@@ -38,12 +39,12 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

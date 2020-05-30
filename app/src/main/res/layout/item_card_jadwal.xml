@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/itemTV"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape">
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/margin2"
+    >
+    <LinearLayout
+        android:id="@+id/hariLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/hariTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hari"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/white"
+        android:layout_marginRight="@dimen/margin1"
+        >
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin2"
+        >
+
+
     <LinearLayout
         android:padding="@dimen/margin2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="3"
-        android:background="@drawable/button_muda"
+        android:background="@color/blueLight"
         >
     <TextView
         android:id="@+id/jamTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="17.00-18.00"
+        android:textSize="14sp"
         android:textColor="@color/white"
         />
     </LinearLayout>
@@ -23,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@color/white"
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fotoCIV"
@@ -57,7 +94,7 @@
             android:textColor="@color/fontDark"
             android:textSize="14sp"
             />
-
+    </LinearLayout>
     </LinearLayout>
     </LinearLayout>
 

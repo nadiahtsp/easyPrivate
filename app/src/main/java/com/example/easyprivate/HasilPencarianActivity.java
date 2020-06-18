@@ -12,6 +12,8 @@ import android.util.Log;
 import com.example.easyprivate.adapter.RvAdapter;
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
+import com.example.easyprivate.model.SawGuru;
+import com.example.easyprivate.model.FilterGuru;
 import com.example.easyprivate.model.User;
 
 import java.util.ArrayList;
@@ -65,30 +67,36 @@ public class HasilPencarianActivity extends AppCompatActivity {
         if ( !currIntent.getStringExtra("jenisKelaminStr").equals("-") ){
             jk =  currIntent.getStringExtra("jenisKelaminStr");
         }
-        Call<ArrayList<User>> call = apiInterface.cariGuru(id_mapelInt,
+        Call<FilterGuru> call = apiInterface.cariGuru(id_mapelInt,
                 jk,
-                hari
+                hari,
+                uh.retrieveUser().getAlamat().getLatitude(),
+                uh.retrieveUser().getAlamat().getLongitude()
         );
-        call.enqueue(new Callback<ArrayList<User>>() {
+        call.enqueue(new Callback<FilterGuru>() {
             @Override
-            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+            public void onResponse(Call<FilterGuru> call, Response<FilterGuru> response) {
                 Log.d(TAG, "onResponse: "+response.message());
                 if (!response.isSuccessful()){
                     return;
                 }
-             userArrayList = response.body();
-                Log.d(TAG, "onResponse:response body size: "+response.body().size());
-                RvAdapter rvAdapter = new RvAdapter(HasilPencarianActivity.this,userArrayList);
+                FilterGuru fg = response.body();
+                Log.d(TAG, "onResponse:response body size: "+response.body().getSawGuru().size());
+                RvAdapter rvAdapter = new RvAdapter(HasilPencarianActivity.this,fg.getUser(),fg.getSawGuru());
                 rvAdapter.setHari(hari);
                 rvList.setAdapter(rvAdapter);
                 rvList.setLayoutManager(new LinearLayoutManager(HasilPencarianActivity.this));
             }
 
             @Override
-            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+            public void onFailure(Call<FilterGuru> call, Throwable t) {
                 Log.d(TAG, "onFailure: "+t.getMessage());
 
             }
         });
+    }
+    public FilterGuru sortGuru(FilterGuru fguru){
+
+        return null;
     }
 }

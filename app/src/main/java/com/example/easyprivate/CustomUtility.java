@@ -109,6 +109,7 @@ public class CustomUtility {
 
     public String pemesananToJson(Pemesanan pemesanan){
         String jsonStr = new Gson().toJson(pemesanan);
+        Log.d(TAG, "pemesananToJson: "+jsonStr);
         return jsonStr;
     }
 

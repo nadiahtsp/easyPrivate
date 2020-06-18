@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin2"
+    android:orientation="vertical"
+    android:padding="@dimen/margin2"
+    android:background="@drawable/button_white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/date"
+        android:tint="@color/fontDark"
+        />
+
+<TextView
+    android:id="@+id/dateTV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:text="Senin 20 Oktober 2020"
+    android:textColor="@color/fontDark"
+    android:textSize="18sp"
+    android:layout_gravity="center_vertical"
+    />
+    </LinearLayout>
+
+
+
+</LinearLayout>

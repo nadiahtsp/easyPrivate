@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.easyprivate.CustomUtility;
 import com.example.easyprivate.DetailPencarianItem;
 import com.example.easyprivate.R;
+import com.example.easyprivate.model.SawGuru;
 import com.example.easyprivate.model.User;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ private Context mContext;
 private ArrayList<User> userArrayList = new ArrayList<>();
 private Geocoder geocoder;
 private CustomUtility cu;
+private ArrayList<SawGuru> jarakAl = new ArrayList<>();
 private ArrayList<String> hari = new ArrayList<>();
 
     public ArrayList<String> getHari() {
@@ -40,15 +42,17 @@ private ArrayList<String> hari = new ArrayList<>();
         this.hari = hari;
     }
 
-    public RvAdapter(Context mContext, ArrayList<User> userArrayList) {
+
+    public RvAdapter(Context mContext, ArrayList<User> userArrayList,ArrayList<SawGuru> jarakAl) {
         this.mContext = mContext;
         this.userArrayList = userArrayList;
+        this.jarakAl = jarakAl;
         this.geocoder = new Geocoder(mContext, Locale.getDefault());
         this.cu = new CustomUtility(mContext);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-    private TextView namaTV,jenisKelaminTV,locationTV;
+    private TextView namaTV,jenisKelaminTV,locationTV,jarakTV;
     private CircleImageView fotoCIV;
     private LinearLayout itemLL;
 
@@ -58,6 +62,7 @@ private ArrayList<String> hari = new ArrayList<>();
             namaTV = iv.findViewById(R.id.namaTV);
             jenisKelaminTV=iv.findViewById(R.id.jenis_kelaminTV);
             locationTV= iv.findViewById(R.id.locationTV);
+            jarakTV=iv.findViewById(R.id.jarakTV);
             fotoCIV=iv.findViewById(R.id.fotoCIV);
             itemLL=iv.findViewById(R.id.itemLL);
         }
@@ -74,6 +79,7 @@ private ArrayList<String> hari = new ArrayList<>();
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = userArrayList.get(position);
+        SawGuru jarak = jarakAl.get(position);
         String result ="";
         holder.namaTV.setText(user.getName());
         holder.jenisKelaminTV.setText(user.getJenisKelamin());
@@ -90,7 +96,7 @@ private ArrayList<String> hari = new ArrayList<>();
 
         result = sb.toString();
         holder.locationTV.setText(result);
-
+        holder.jarakTV.setText(String. format("%.1f",jarak.getJarakHaversine())+" Km");
         holder.itemLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

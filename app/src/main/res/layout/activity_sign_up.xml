@@ -4,33 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/whiteDark"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:orientation="vertical">
-
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="#000"
-    android:text="Pendaftar Murid"
-    android:gravity="center"
-    android:textStyle="bold"
-    android:textSize="25sp"
-    android:layout_marginBottom="30dp"
-    ></TextView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:focusableInTouchMode="false"
-        android:orientation="vertical"
-       >
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Pendaftar Murid"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_marginBottom="30dp"
+            ></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusableInTouchMode="false"
+            android:orientation="vertical"
+            >
 
             <EditText
                 android:id="@+id/txtName"
@@ -54,86 +54,101 @@
                 android:background="@drawable/shape"/>
 
 
-        <EditText
-            android:id="@+id/date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:editable="false"
-            android:background="@drawable/shape"
-            android:hint="Tanggal Lahir" />
+            <EditText
+                android:id="@+id/date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:editable="false"
+                android:background="@drawable/shape"
+                android:hint="Tanggal Lahir" />
 
 
-        <EditText
-            android:id="@+id/txtMob"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape"
-            android:hint="No. Telephone"
-            android:inputType="phone" />
+            <EditText
+                android:id="@+id/txtMob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape"
+                android:hint="No. Telephone"
+                android:inputType="phone" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_margin="10dp"
-            android:text="Jenis kelamin"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/jenisKelaminRGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="20dp">
-
-            <RadioButton
-                android:id="@+id/lakiLakiRBtn"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Laki-laki" />
+                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:text="Jenis kelamin"
+                android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/perempuanRBtn"
+            <RadioGroup
+                android:id="@+id/jenisKelaminRGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp">
+
+                <RadioButton
+                    android:id="@+id/lakiLakiRBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Laki-laki" />
+
+                <RadioButton
+                    android:id="@+id/perempuanRBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Perempuan" />
+
+            </RadioGroup>
+
+            <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perempuan" />
+                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Alamat Belajar"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:hint="Alamat Lengkap"
+                android:background="@drawable/shape"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
+                android:text="Pilih Titik Lokasi Rumahmu"
+                android:textSize="16sp" />
+            <fragment
+                android:id="@+id/fragmentMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
-        </RadioGroup>
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/btnSimpan"
+                android:background="@drawable/shape_background"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simpan"
+                />
 
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_margin="10dp"
-            android:text="Alamat Belajar"
-            android:textSize="18sp" />
-        <EditText
-            android:id="@+id/alamat"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:hint="Alamat Lengkap"
-            android:background="@drawable/shape"/>
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/fragmentMap"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
-        <Button
-            android:layout_marginTop="20dp"
-            android:id="@+id/btnSimpan"
-            android:background="@drawable/shape_background"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan"
-            />
-
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+</ScrollView>
 

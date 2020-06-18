@@ -1,6 +1,7 @@
 package com.example.easyprivate.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Geocoder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easyprivate.CustomUtility;
+import com.example.easyprivate.QrCodeActivity;
 import com.example.easyprivate.R;
-import com.example.easyprivate.model.JadwalPemesananPerminggu;
 import com.example.easyprivate.model.Pemesanan;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> {
+public class PemesananAbsenAdapter extends RecyclerView.Adapter<PemesananAbsenAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Pemesanan> pemesananAL = new ArrayList<>();
     private Geocoder geocoder;
     private CustomUtility cu;
 
-    public MapelAdapter(Context mContext, ArrayList<Pemesanan> pemesananAL) {
+    public PemesananAbsenAdapter(Context mContext, ArrayList<Pemesanan> pemesananAL) {
         this.mContext = mContext;
         this.pemesananAL = pemesananAL;
         this.geocoder = new Geocoder(mContext);
@@ -49,8 +50,8 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_card_les, parent,false);
-        return new MapelAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_card_qrcode, parent,false);
+        return new PemesananAbsenAdapter.ViewHolder(v);
     }
 
     @Override
@@ -58,12 +59,20 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
         Pemesanan pemesanan = pemesananAL.get(position);
         String result ="";
         holder.namaTV.setText(pemesanan.getGuru().getName());
-        holder.jenis_kelaminTV.setText(pemesanan.getGuru().getJenisKelamin());
         holder.mapelTV.setText(pemesanan.getMataPelajaran().getNamaMapel());
         if (pemesanan.getGuru().getAvatar() != null ) {
             cu.putIntoImage(pemesanan.getGuru().getAvatar(), holder.fotoCIV);
         }
+        holder.itemLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, QrCodeActivity.class);
+                i.putExtra("id_pemesanan",pemesanan.getIdPemesanan());
+                mContext.startActivity(i);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

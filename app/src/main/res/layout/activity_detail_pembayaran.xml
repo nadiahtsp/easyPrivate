@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/margin1"
+    android:layout_height="match_parent"
+    tools:context=".DetailPembayaran">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detail Pembayaran"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape"
+        android:padding="@dimen/margin2"
+        />
+    <TextView
+        android:id="@+id/totalbyr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rp 200000"
+        android:layout_above="@id/bayarBT"
+        android:gravity="right"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin1"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Pembayaran"
+        android:layout_above="@id/bayarBT"
+        android:gravity="left"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin1"
+        />
+    <Button
+        android:id="@+id/bayarBT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_muda"
+        android:text="Bayar"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin2"
+        />
+
+</RelativeLayout>

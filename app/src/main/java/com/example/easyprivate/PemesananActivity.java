@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
@@ -41,7 +42,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PemesananActivity extends AppCompatActivity {
-    EditText nama,tanggal_pertemuan;
+    TextView nama;
+    EditText tanggal_pertemuan;
     Spinner jenjangSP,kelasSP,mapelSP,jenis_kelaminSP;
     CheckBox senin,selasa,rabu,kamis,jumat,sabtu,minggu;
     ArrayList<Jenjang> jenjangAL;
@@ -63,7 +65,7 @@ public class PemesananActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pemesanan);
         pemesananActivity = this;
         init();
-
+        nama.setText("Hi, "+uh.retrieveUser().getName());
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +80,7 @@ public class PemesananActivity extends AppCompatActivity {
     }
 
     private void init(){
-        nama = findViewById(R.id.namaMuridET);
+        nama = findViewById(R.id.namaMuridTV);
         jenjangSP = findViewById(R.id.spinner_jenjang);
         kelasSP = findViewById(R.id.spinner_kelas);
         mapelSP = findViewById(R.id.spinner_mapel);

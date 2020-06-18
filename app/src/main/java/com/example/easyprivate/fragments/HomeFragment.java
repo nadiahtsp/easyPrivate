@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.easyprivate.JadwalActivity;
 import com.example.easyprivate.MapelActivity;
+import com.example.easyprivate.PembayaranActivity;
 import com.example.easyprivate.PemesananActivity;
 import com.example.easyprivate.R;
 
 
 public class HomeFragment extends Fragment {
-    private LinearLayout cari_guru,jadwal,guru_saya;
+    private LinearLayout cari_guru,jadwal,guru_saya,pembayaran;
     Context mContext;
 
     @Nullable
@@ -49,12 +50,22 @@ public class HomeFragment extends Fragment {
                 mContext.startActivity(i);
             }
         });
+        pembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mContext, PembayaranActivity.class);
+                mContext.startActivity(i);
+            }
+        });
         return v;
+
+
     }
 
     private void init(View v){
         cari_guru = v.findViewById(R.id.cari_guru);
         jadwal = v.findViewById(R.id.jadwal);
         guru_saya = v.findViewById(R.id.guruSaya);
+        pembayaran=v.findViewById(R.id.pembayaranIV);
     }
 }

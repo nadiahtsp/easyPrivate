@@ -1,13 +1,16 @@
 package com.example.easyprivate.api;
 
+import com.example.easyprivate.model.Absen;
 import com.example.easyprivate.model.JadwalAvailable;
 import com.example.easyprivate.model.JadwalPemesananPerminggu;
+import com.example.easyprivate.model.FilterGuru;
 import com.example.easyprivate.model.Jenjang;
 import com.example.easyprivate.model.MataPelajaran;
+import com.example.easyprivate.model.MidtransPembayaran;
+import com.example.easyprivate.model.PembayaranAbsen;
 import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -54,10 +57,12 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("user/cari_guru")
-    Call<ArrayList<User>> cariGuru(
+    Call<FilterGuru> cariGuru(
             @Field("id_mapel") Integer id_mapel,
             @Field("jenis_kelamin") String jenis_kelamin,
-            @Field("hari[]" ) ArrayList<String> hari
+            @Field("hari[]" ) ArrayList<String> hari,
+            @Field("latitude_murid" ) Double latitude,
+            @Field("longitude_murid" ) Double longitude
             );
     @GET("user/detail/{id}")
     Call<User> detailGuruById(
@@ -114,6 +119,40 @@ public interface ApiInterface {
             @Field("id_guru") Integer id_guru,
             @Field("id_murid") Integer id_murid,
             @Field("status_pemesanan") Integer status
+    );
+    @FormUrlEncoded
+    @POST("absen/filter")
+    Call<ArrayList<Absen>> absenFilter(
+            @Field("id_absen") Integer id_absen,
+            @Field("id_pemesanan") Integer id_pemesanan,
+            @Field("status_pemesanan") Integer status,
+            @Field("id_jadwal_pemesanan_perminggu") Integer id_jadwal_pemesanan_perminggu,
+            @Field("id_guru") Integer id_guru,
+            @Field("id_murid") Integer id_murid
+
+    );
+
+    @FormUrlEncoded
+    @POST("absen_pembayaran")
+    Call<ArrayList<PembayaranAbsen>> pemAbsen(
+            @Field("id_murid") Integer id_murid,
+            @Field("id_guru") Integer id_guru,
+            @Field("id_pemesanan") Integer id_pemesanan,
+            @Field("bulan") Integer bulan,
+            @Field("tahun") Integer tahun,
+            @Field("distinct") String distinct
+
+    );
+    @FormUrlEncoded
+    @POST("midtrans/charge")
+    Call<ArrayList<MidtransPembayaran>> midtransCharge(
+            @Field("item_id[]") ArrayList<Integer>item_id,
+            @Field("item_price[]") ArrayList<Integer> item_price,
+            @Field("item_quantity[]") ArrayList<Integer> item_quantity,
+            @Field("item_name[]") ArrayList<Integer> item_name,
+            @Field("tahun") Integer tahun,
+            @Field("distinct") String distinct
+
     );
 
 }

@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Pemesanan {
+
     @Expose
     @SerializedName("jadwal_pemesanan_perminggu")
     private List<JadwalPemesananPerminggu> jadwalPemesananPerminggu;
@@ -16,35 +17,32 @@ public class Pemesanan {
     @SerializedName("guru")
     private User guru;
     @Expose
-    @SerializedName("first_meet")
-    private String firstMeet;
-    @Expose
-    @SerializedName("id_pemesanan")
-    private int idPemesanan;
-    @Expose
     @SerializedName("murid")
     private User murid;
     @Expose
-    @SerializedName("jumlah_pertemuan")
-    private int jumlahPertemuan;
-    @Expose
     @SerializedName("status")
-    private int status;
+    private Integer status;
+    @Expose
+    @SerializedName("first_meet")
+    private String firstMeet;
     @Expose
     @SerializedName("waktu_pemesanan")
     private String waktuPemesanan;
     @Expose
     @SerializedName("kelas")
-    private int kelas;
+    private Integer kelas;
     @Expose
     @SerializedName("id_mapel")
-    private int idMapel;
+    private Integer idMapel;
     @Expose
     @SerializedName("id_murid")
-    private int idMurid;
+    private Integer idMurid;
     @Expose
     @SerializedName("id_guru")
-    private int idGuru;
+    private Integer idGuru;
+    @Expose
+    @SerializedName("id_pemesanan")
+    private Integer idPemesanan;
 
     public List<JadwalPemesananPerminggu> getJadwalPemesananPerminggu() {
         return jadwalPemesananPerminggu;
@@ -62,29 +60,12 @@ public class Pemesanan {
         this.mataPelajaran = mataPelajaran;
     }
 
-
-    public String getFirstMeet() {
-        return firstMeet;
-    }
-
-    public void setFirstMeet(String firstMeet) {
-        this.firstMeet = firstMeet;
-    }
-
     public User getGuru() {
         return guru;
     }
 
     public void setGuru(User guru) {
         this.guru = guru;
-    }
-
-    public int getIdPemesanan() {
-        return idPemesanan;
-    }
-
-    public void setIdPemesanan(int idPemesanan) {
-        this.idPemesanan = idPemesanan;
     }
 
     public User getMurid() {
@@ -95,12 +76,28 @@ public class Pemesanan {
         this.murid = murid;
     }
 
-    public int getJumlahPertemuan() {
-        return jumlahPertemuan;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public void setJumlahPertemuan(int jumlahPertemuan) {
-        this.jumlahPertemuan = jumlahPertemuan;
+    public void setKelas(Integer kelas) {
+        this.kelas = kelas;
+    }
+
+    public void setIdMapel(Integer idMapel) {
+        this.idMapel = idMapel;
+    }
+
+    public void setIdMurid(Integer idMurid) {
+        this.idMurid = idMurid;
+    }
+
+    public void setIdGuru(Integer idGuru) {
+        this.idGuru = idGuru;
+    }
+
+    public void setIdPemesanan(Integer idPemesanan) {
+        this.idPemesanan = idPemesanan;
     }
 
     public int getStatus() {
@@ -109,6 +106,14 @@ public class Pemesanan {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getFirstMeet() {
+        return firstMeet;
+    }
+
+    public void setFirstMeet(String firstMeet) {
+        this.firstMeet = firstMeet;
     }
 
     public String getWaktuPemesanan() {
@@ -151,5 +156,12 @@ public class Pemesanan {
         this.idGuru = idGuru;
     }
 
+    public int getIdPemesanan() {
+        return idPemesanan;
+    }
+
+    public void setIdPemesanan(int idPemesanan) {
+        this.idPemesanan = idPemesanan;
+    }
 
 }

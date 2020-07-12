@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -21,11 +22,14 @@ import android.widget.Toast;
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
 import com.example.easyprivate.fragments.PesananFragment;
+import com.example.easyprivate.model.GuruMapel;
 import com.example.easyprivate.model.JadwalAvailable;
+import com.example.easyprivate.model.MataPelajaran;
 import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,9 +38,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailPemesanan extends AppCompatActivity {
-    TextView namaTV, jkTV, uniTV, lokasiTV,tglTV,statusTV;
+    TextView namaTV, jkTV, uniTV, lokasiTV,tglTV,statusTV,pengalamanMengajarTV,ipkTV,usiaTV;
     CustomUtility cu;
     Button selesaiTV;
+    TextView hargaTV;
+    UserHelper uh;
+    LinearLayout mapelLL;
     LinearLayout jadwalLL;
     CircleImageView fotoCIV;
     private RetrofitClientInstance rci = new RetrofitClientInstance();
@@ -58,11 +65,16 @@ public class DetailPemesanan extends AppCompatActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
         namaTV = findViewById(R.id.namaTV);
         jkTV = findViewById(R.id.jenis_kelaminTV);
+        uh = new UserHelper(this);
+        hargaTV = findViewById(R.id.hargaTV);
         cu = new CustomUtility(this);
         fotoCIV = findViewById(R.id.civProfilePic);;
         lokasiTV = findViewById(R.id.locationTV);
         tglTV = findViewById(R.id.tglTV);
-        uniTV = findViewById(R.id.universitasTV);
+        pengalamanMengajarTV = findViewById(R.id.pengalamanMengajar);
+        ipkTV = findViewById(R.id.ipk);
+        usiaTV = findViewById(R.id.usiaTV);
+        mapelLL = findViewById(R.id.mapelLL);
         jadwalLL =findViewById(R.id.TVjadwal);
         statusTV=findViewById(R.id.statusTV);
         selesaiTV=findViewById(R.id.selesai);
@@ -112,7 +124,7 @@ public class DetailPemesanan extends AppCompatActivity {
         namaTV.setText(pemesanan.getGuru().getName());
         jkTV.setText(pemesanan.getGuru().getJenisKelamin());
         cu.putIntoImage(pemesanan.getGuru().getAvatar(), fotoCIV);
-        uniTV.setText(pemesanan.getGuru().getUniversitas());
+//        uniTV.setText(pemesanan.getGuru().getUniversitas());
         Address address = cu.getAddress(pemesanan.getGuru().getAlamat().getLatitude(), pemesanan.getGuru().getAlamat().getLongitude());
         ;
         StringBuilder sb = new StringBuilder();
@@ -123,8 +135,74 @@ public class DetailPemesanan extends AppCompatActivity {
         sb.append(address.getSubAdminArea()).append("");//kota
         String result = "";
         result = sb.toString();
-
         lokasiTV.setText(result);
+
+        ipkTV.setText(String.valueOf(pemesanan.getGuru().getPendaftaranGuru().get(0).getNilaiIpk()));
+
+        //pengalaman ajar
+        Integer pengalaman_ajar;
+        pengalaman_ajar =  pemesanan.getGuru().getPendaftaranGuru().get(0).getPengalamanMengajar();
+        Double pengalaman_ajar_double = Double.valueOf(pengalaman_ajar);
+        Double tahun_ajar = pengalaman_ajar_double/12;
+        Integer pembulatan = tahun_ajar.intValue();
+        Integer modulus = pengalaman_ajar%12;
+        if (pengalaman_ajar>12 && modulus>0) {
+            pengalamanMengajarTV.setText(pembulatan + " Tahun " + modulus + " Bulan");
+        }
+        else if(modulus==0){
+            pengalamanMengajarTV.setText(pembulatan+" Tahun");
+        }
+        else{
+            pengalamanMengajarTV.setText(modulus+" Bulan");
+        }
+
+        //mapel
+        ArrayList<GuruMapel> guruMapels = pemesanan.getGuru().getGuruMapel();
+        Pemesanan getmapel = uh.retrievePemesanan();
+        Integer id_mapel = getmapel.getIdMapel();
+        for (int i=0; i<guruMapels.size(); i++){
+            MataPelajaran currMapel = guruMapels.get(i).getMataPelajaran();
+            TextView mapel = new TextView(this);
+            mapel.setText(currMapel.getNamaMapel());
+            if (currMapel.getIdMapel() == id_mapel){
+                mapel.setTypeface(mapel.getTypeface(), Typeface.BOLD);
+                mapel.setBackgroundColor(this.getResources().getColor(R.color.colorPrimary));
+                mapel.setTextColor(this.getResources().getColor(R.color.white));
+            }
+            else {
+                mapel.setTextColor(this.getResources().getColor(R.color.fontDark));
+            }
+            mapelLL.addView(mapel);
+        }
+
+        //harga
+        hargaTV.setText("Rp "+pemesanan.getMataPelajaran().getJenjang().getHargaPerPertemuan());
+
+        //usia
+        String tgl_lahir = pemesanan.getGuru().getTanggalLahir();
+        Calendar now = Calendar.getInstance();
+
+        String tahun = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "yyyy");
+        String bulan = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "MM");
+        String hari = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "dd");
+
+
+        Calendar tgl_lahir_cal = Calendar.getInstance();
+        tgl_lahir_cal.set(Calendar.YEAR,Integer.parseInt(tahun));
+        tgl_lahir_cal.set(Calendar.MONTH,Integer.parseInt(bulan)-1);
+        tgl_lahir_cal.set(Calendar.DAY_OF_MONTH,Integer.parseInt(hari));
+
+        Long nowLong = now.getTime().getTime();
+        Long tgl_lahir_long = tgl_lahir_cal.getTime().getTime();
+
+        Long selisih = nowLong - tgl_lahir_long;
+        Log.d(TAG, "getUser: selisih " +selisih);
+
+        Long usiaLong = selisih/1000/60/60/24/365;
+        Log.d(TAG, "getUser: usiaLong " + usiaLong);
+        usiaTV.setText(usiaLong + " Tahun");
+
+
         if (pemesanan.getFirstMeet() != null) {
             String tglPertemuanPertama = cu.reformatDateTime(pemesanan.getFirstMeet(), "yyyy-MM-dd HH:mm:ss", "EEEE - dd MMMM yyyy");
             tglTV.setText(tglPertemuanPertama);
@@ -180,6 +258,7 @@ public class DetailPemesanan extends AppCompatActivity {
         detailPemesanan.enqueue(new Callback<Pemesanan>() {
             @Override
             public void onResponse(Call<Pemesanan> call, Response<Pemesanan> response) {
+                Log.d(TAG, "onResponse: pemesanan detail "+response.message());
                 p.dismiss();
                 if (!response.isSuccessful()) {
                     return;
@@ -205,7 +284,7 @@ public class DetailPemesanan extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Pemesanan> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: pemesanan detail "+t.getMessage());
             }
         });
 

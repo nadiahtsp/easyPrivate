@@ -93,4 +93,5 @@ public class ProfilFragment extends Fragment {
             cu.putIntoImage(user.getAvatar(), fotoCIV);
         }
     }
+
 }

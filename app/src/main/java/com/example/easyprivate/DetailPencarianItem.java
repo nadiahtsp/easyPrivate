@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -25,7 +26,9 @@ import android.widget.Toast;
 
 import com.example.easyprivate.api.ApiInterface;
 import com.example.easyprivate.api.RetrofitClientInstance;
+import com.example.easyprivate.model.GuruMapel;
 import com.example.easyprivate.model.JadwalAvailable;
+import com.example.easyprivate.model.MataPelajaran;
 import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
 
@@ -43,9 +46,11 @@ import retrofit2.Response;
 
 public class DetailPencarianItem extends AppCompatActivity {
     private User user;
-    TextView namaTV, jkTV, uniTV, lokasiTV;
+    TextView namaTV, jkTV, uniTV, lokasiTV,pengalamanMengajarTV,ipkTV,usiaTV,hargaTV;
     Button simpan;
+    LinearLayout mapelLL;
     CustomUtility cu;
+    RadioButton jamRB;
     Spinner tglSS;
     CircleImageView fotoCIV;
     ArrayList<JadwalAvailable> jaAL = new ArrayList<>();
@@ -71,13 +76,6 @@ public class DetailPencarianItem extends AppCompatActivity {
         Log.d(TAG, "onCreate: hari size " + hari.size());
         getDetailGuru(idGuru);
 
-        simpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callTambahPesanan();
-
-            }
-        });
     }
 
     public void init() {
@@ -85,11 +83,15 @@ public class DetailPencarianItem extends AppCompatActivity {
         namaTV = findViewById(R.id.namaTV);
         jkTV = findViewById(R.id.jenis_kelaminTV);
         cu = new CustomUtility(this);
+        hargaTV = findViewById(R.id.hargaTV);
         fotoCIV = findViewById(R.id.civProfilePic);
         llJadwal = findViewById(R.id.LLjadwal);
         lokasiTV = findViewById(R.id.locationTV);
         tglSS = findViewById(R.id.spinnerTgl);
-        uniTV = findViewById(R.id.universitasTV);
+        pengalamanMengajarTV = findViewById(R.id.pengalamanMengajar);
+        ipkTV = findViewById(R.id.ipk);
+        usiaTV = findViewById(R.id.usiaTV);
+        mapelLL = findViewById(R.id.mapelLL);
         uh = new UserHelper(this);
         pesanan = uh.retrievePemesanan();
         hari = getIntent().getStringArrayListExtra("hariIntent");
@@ -97,13 +99,92 @@ public class DetailPencarianItem extends AppCompatActivity {
         simpan= findViewById(R.id.buttonBelajar);
     }
 
+    public void showDialog(){
+        AlertDialog ad = new AlertDialog.Builder(this).create();
+        ad.setTitle("Form Tidak Lengkap");
+        ad.setMessage("Mohon Pilih Jam Belajar Les");
+
+        ad.setButton(DialogInterface.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        ad.show();
+    }
     public void getUser(User user) {
         namaTV.setText(user.getName());
+
         jkTV.setText(user.getJenisKelamin());
+
         cu.putIntoImage(user.getAvatar(), fotoCIV);
-        uniTV.setText(user.getUniversitas());
+
+        ipkTV.setText(String.valueOf(user.getPendaftaranGuru().get(0).getNilaiIpk()));
+
+        //pengalaman ajar
+        Integer pengalaman_ajar;
+        pengalaman_ajar =  user.getPendaftaranGuru().get(0).getPengalamanMengajar();
+        Double pengalaman_ajar_double = Double.valueOf(pengalaman_ajar);
+        Double tahun_ajar = pengalaman_ajar_double/12;
+        Integer pembulatan = tahun_ajar.intValue();
+        Integer modulus = pengalaman_ajar%12;
+        if (pengalaman_ajar>12 && modulus>0) {
+            pengalamanMengajarTV.setText(pembulatan + " Tahun " + modulus + " Bulan");
+        }
+        else if(modulus==0){
+            pengalamanMengajarTV.setText(pembulatan+" Tahun");
+        }
+        else{
+            pengalamanMengajarTV.setText(modulus+" Bulan");
+        }
+
+        //usia
+        String tgl_lahir = user.getTanggalLahir();
+        Calendar now = Calendar.getInstance();
+
+        String tahun = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "yyyy");
+        String bulan = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "MM");
+        String hari = cu.reformatDateTime(tgl_lahir,"yyyy-MM-dd", "dd");
+
+
+        Calendar tgl_lahir_cal = Calendar.getInstance();
+        tgl_lahir_cal.set(Calendar.YEAR,Integer.parseInt(tahun));
+        tgl_lahir_cal.set(Calendar.MONTH,Integer.parseInt(bulan)-1);
+        tgl_lahir_cal.set(Calendar.DAY_OF_MONTH,Integer.parseInt(hari));
+
+        Long nowLong = now.getTime().getTime();
+        Long tgl_lahir_long = tgl_lahir_cal.getTime().getTime();
+
+        Long selisih = nowLong - tgl_lahir_long;
+        Log.d(TAG, "getUser: selisih " +selisih);
+
+        Long usiaLong = selisih/1000/60/60/24/365;
+        Log.d(TAG, "getUser: usiaLong " + usiaLong);
+        usiaTV.setText(usiaLong + " Tahun");
+
+        //mapel
+        ArrayList<GuruMapel> guruMapels = user.getGuruMapel();
+        Pemesanan pemesanan = uh.retrievePemesanan();
+        Integer id_mapel = pemesanan.getIdMapel();
+        for (int i=0; i<guruMapels.size(); i++){
+            MataPelajaran currMapel = guruMapels.get(i).getMataPelajaran();
+            TextView mapel = new TextView(this);
+            mapel.setText(currMapel.getNamaMapel());
+            if (currMapel.getIdMapel() == id_mapel){
+                mapel.setTypeface(mapel.getTypeface(), Typeface.BOLD);
+                mapel.setBackgroundColor(this.getResources().getColor(R.color.colorPrimary));
+                mapel.setTextColor(this.getResources().getColor(R.color.white));
+                //harga
+                hargaTV.setText("Rp "+currMapel.getJenjang().getHargaPerPertemuan());
+            }
+            else {
+                mapel.setTextColor(this.getResources().getColor(R.color.fontDark));
+            }
+            mapelLL.addView(mapel);
+        }
+
+        //alamat
         Address address = cu.getAddress(user.getAlamat().getLatitude(), user.getAlamat().getLongitude());
-        ;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
             sb.append(address.getAddressLine(i)).append("\n");//adress
@@ -114,6 +195,7 @@ public class DetailPencarianItem extends AppCompatActivity {
         result = sb.toString();
 
         lokasiTV.setText(result);
+
 
     }
 
@@ -147,6 +229,7 @@ public class DetailPencarianItem extends AppCompatActivity {
         ja.enqueue(new Callback<ArrayList<JadwalAvailable>>() {
             @Override
             public void onResponse(Call<ArrayList<JadwalAvailable>> call, Response<ArrayList<JadwalAvailable>> response) {
+                Log.d(TAG, "onResponse: jadwal "+response.message());
                 if (!response.isSuccessful()) {
 
                     return;
@@ -158,7 +241,7 @@ public class DetailPencarianItem extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<JadwalAvailable>> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: jadwal "+t.getMessage());
             }
         });
     }
@@ -236,6 +319,18 @@ public class DetailPencarianItem extends AppCompatActivity {
                 }
             }
         }
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkIfFilled()){
+                    callTambahPesanan();
+                }
+                else {
+                    showDialog();
+                }
+
+            }
+        });
 
     }
 
@@ -308,6 +403,19 @@ public class DetailPencarianItem extends AppCompatActivity {
                         break;
                 }
                 return hariInt;
+
+    }
+    public boolean checkIfFilled(){
+        ArrayList<Boolean> rbBol =new ArrayList<>();
+        for (int i=0; i<idRadioGroup.size(); i++){
+            RadioGroup rg = findViewById(idRadioGroup.get(i));
+            Integer selectedId = rg.getCheckedRadioButtonId();
+            Log.d(TAG, "checkIfFilled: sel id" +selectedId);
+            if (selectedId==-1){
+                return false;
+            }
+        }
+        return true;
 
     }
 

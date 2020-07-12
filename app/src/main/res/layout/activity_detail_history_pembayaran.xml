@@ -6,7 +6,7 @@
     android:background="@color/colorPrimary"
     android:padding="@dimen/margin1"
     android:layout_height="match_parent"
-    tools:context=".DetailPembayaran">
+    tools:context=".DetailHistoryPembayaranActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,8 +50,8 @@
         android:id="@+id/bayarBT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_muda"
-        android:text="Bayar"
+        android:background="@color/greenLight"
+        android:text="Sudah Bayar"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin2"

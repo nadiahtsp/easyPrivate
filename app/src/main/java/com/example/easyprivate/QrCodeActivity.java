@@ -28,7 +28,7 @@ public class QrCodeActivity extends AppCompatActivity {
     ImageView qrCodeIv;
     RecyclerView rvList;
     Pemesanan currPemesanan;
-    CustomUtility cu = new CustomUtility(this);
+    CustomUtility cu;
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface = rci.getApiInterface();
     private Context mContext;
@@ -51,6 +51,7 @@ public class QrCodeActivity extends AppCompatActivity {
         qrCodeIv = findViewById(R.id.qrCodeIv);
         uh = new UserHelper(this);
         rvList = findViewById(R.id.rvList);
+        cu = new CustomUtility(this);
     }
 
     public void callPemesananbsen() {

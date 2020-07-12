@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.easyprivate.adapter.AbsenPembayaranAdapter;
 import com.example.easyprivate.adapter.MapelAdapter;
@@ -23,10 +27,12 @@ import retrofit2.Response;
 
 public class PembayaranActivity extends AppCompatActivity {
     RecyclerView rvList;
+    Button hispem;
     private RetrofitClientInstance rci = new RetrofitClientInstance();
     private ApiInterface apiInterface= rci.getApiInterface();
     private Context mContext;
     UserHelper uh;
+    public static Activity pembayaranActivity;
     ArrayList<PembayaranAbsen> pembayaranAbsens =new ArrayList<>();
     private static final String TAG = "PembayaranActivity";
 
@@ -34,13 +40,22 @@ public class PembayaranActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembayaran);
+        pembayaranActivity = this;
         init();
         callAbsenPembayaran();
+        hispem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(PembayaranActivity.this, HistoryPembayaranActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void init(){
         rvList = findViewById(R.id.rvList);
         uh = new UserHelper(this);
+        hispem = findViewById(R.id.hispem);
     }
 
     private void callAbsenPembayaran(){
@@ -49,6 +64,7 @@ public class PembayaranActivity extends AppCompatActivity {
                 null,
                 null,
                 null,
+                "unpaid",
                 "id_murid");
         cPemAbsen.enqueue(new Callback<ArrayList<PembayaranAbsen>>() {
             @Override

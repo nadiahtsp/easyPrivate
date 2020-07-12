@@ -52,52 +52,71 @@
             android:gravity="center_horizontal"
             android:textSize="15sp"
             />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/margin1"-->
+<!--            >-->
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="2"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Universitas : "-->
+<!--                android:textSize="18sp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/universitasTV"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="5"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="5dp"-->
+<!--                android:text="Universitas Indonesia"-->
+<!--                android:textColor="@color/fontDark"-->
+<!--                android:textSize="18sp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                />-->
+<!--        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin1"
-            >
+            android:layout_height="wrap_content">
             <ImageView
+                android:src="@drawable/teaching"
+                android:layout_gravity="center_vertical"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/universitas"
-                android:tint="@color/blue"
+                android:tint="@color/colorPrimary"
+                />
+        <LinearLayout
+            android:layout_marginLeft="@dimen/margin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pengalaman Mengajar :"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/fontDark"
                 android:gravity="center_vertical"
                 />
             <TextView
-                android:id="@+id/universitasTV"
+                android:id="@+id/pengalamanMengajar"
                 android:layout_width="match_parent"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:text="Universitas Indonesia"
+                android:text="1 Tahun"
                 android:textColor="@color/fontDark"
                 android:textSize="18sp"
-                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin1"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/location"
-                android:tint="@color/blue"
-                android:gravity="center_vertical"
-                />
-            <TextView
-                android:id="@+id/locationTV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="Jakarta"
-                android:textColor="@color/fontDark"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,24 +127,180 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:tint="@color/blue"
-                android:src="@drawable/date"
+                android:src="@drawable/grandfather"
+                android:tint="@color/colorPrimary"
                 android:layout_gravity="center_vertical"
-                >
-            </ImageView>
+                />
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/margin2"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Usia :"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/fontDark"
+                    android:gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/usiaTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="26 Tahun"
+                    android:textColor="@color/fontDark"
+                    android:textSize="18sp"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/certificate"
+                android:tint="@color/colorPrimary"
+                />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/margin2"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="Nilai IPK :"
+                android:textSize="14sp"
+                android:textColor="@color/fontDark"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/ipk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="3.84"
+                android:textColor="@color/fontDark"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/pin_location"
+                android:tint="@color/colorPrimary"
+                />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin2"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Rumah :"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/fontDark"
+                android:gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:text="Jakarta"
+                android:textColor="@color/fontDark"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/book"
+                android:tint="@color/colorPrimary"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mata Pelajaran yang Dikuasai"
+                    android:textSize="14sp"
+                    android:textColor="@color/fontDark"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/margin2"
+                    android:orientation="vertical"
+                    android:id="@+id/mapelLL"
+                    >
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin1"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/date"
+                android:tint="@color/colorPrimary"
+                />
+            <LinearLayout
+                android:layout_marginLeft="@dimen/margin2"
                 android:id="@+id/LLtgl_pertemuan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-               android:layout_marginLeft="@dimen/margin2"
                 >
+
                 <TextView
-                    android:textColor="@color/fontDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-
+                    android:textSize="14sp"
+                    android:textColor="@color/fontDark"
+                    android:textStyle="bold"
                     android:text="Pilih Tanggal Pertemuan Pertama"
                     >
                 </TextView>
@@ -136,8 +311,6 @@
                     android:layout_height="wrap_content">
                 </Spinner>
             </LinearLayout>
-
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,17 +322,17 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_access_time_black_24dp"
                 android:tint="@color/blue"
-                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin2"
                 android:text="Pilih Jam Belajar Les"
+                android:textSize="14sp"
+                android:layout_marginLeft="@dimen/margin2"
                 android:textColor="@color/fontDark"
-                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
                 />
         </LinearLayout>
 
@@ -172,9 +345,49 @@
             android:orientation="vertical"
             >
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin1"
+            android:layout_marginBottom="@dimen/margin1"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/dollar"
+                android:layout_gravity="center_vertical"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="@color/colorPrimary"
+                />
+            <LinearLayout
+                android:layout_marginLeft="@dimen/margin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
 
-
-
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Harga Per Pertemuan :"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/fontDark"
+                    android:gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/hargaTV"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Rp 150000"
+                    android:textColor="@color/fontDark"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
 

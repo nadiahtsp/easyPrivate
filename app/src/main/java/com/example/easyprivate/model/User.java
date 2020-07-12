@@ -3,6 +3,8 @@ package com.example.easyprivate.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class User {
     @Expose
     @SerializedName("id")
@@ -10,6 +12,12 @@ public class User {
     @Expose
     @SerializedName("alamat")
     private Alamat alamat;
+    @Expose
+    @SerializedName("pendaftaran_guru")
+    private ArrayList<PendaftaranGuru> pendaftaranGuru;
+    @Expose
+    @SerializedName("guru_mapel")
+    private ArrayList<GuruMapel> guruMapel;
     @Expose
     @SerializedName("updated_at")
     private String updatedAt;
@@ -40,6 +48,22 @@ public class User {
     @Expose
     @SerializedName("universitas")
     private String universitas;
+
+    public ArrayList<GuruMapel> getGuruMapel() {
+        return guruMapel;
+    }
+
+    public void setGuruMapel(ArrayList<GuruMapel> guruMapel) {
+        this.guruMapel = guruMapel;
+    }
+
+    public ArrayList<PendaftaranGuru> getPendaftaranGuru() {
+        return pendaftaranGuru;
+    }
+
+    public void setPendaftaranGuru(ArrayList<PendaftaranGuru> pendaftaranGuru) {
+        this.pendaftaranGuru = pendaftaranGuru;
+    }
 
     public int getId() {
         return id;

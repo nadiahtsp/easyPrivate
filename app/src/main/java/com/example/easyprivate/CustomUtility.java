@@ -114,6 +114,10 @@ public class CustomUtility {
     }
 
     public void putIntoImage(String avatarStr, CircleImageView civ){
+        if (avatarStr == null||avatarStr.equals("")){
+            civ.setImageResource(R.drawable.account_default);
+            return;
+        }
         Picasso.get()
                 .load(avatarStr)
                 .placeholder(R.drawable.account_default)

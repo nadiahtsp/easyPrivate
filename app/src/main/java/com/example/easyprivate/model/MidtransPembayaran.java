@@ -3,7 +3,7 @@ package com.example.easyprivate.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public abstract class MidtransPembayaran {
+public class MidtransPembayaran {
 
     @Expose
     @SerializedName("redirect_url")

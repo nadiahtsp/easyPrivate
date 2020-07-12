@@ -10,6 +10,18 @@
         android:layout_height="match_parent"
         android:id="@+id/fragmentMap"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
+   <SearchView
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@color/white"
+       android:layout_marginTop="@dimen/margin2"
+       android:layout_marginLeft="@dimen/margin2"
+       android:layout_marginRight="@dimen/margin2"
+       android:id="@+id/searchSV"
+       android:elevation="5dp"
+       android:iconifiedByDefault="false"
+       android:queryHint="Cari Alamat"
+       />
     <ImageView
         android:id="@+id/pin_location"
         android:layout_width="70dp"

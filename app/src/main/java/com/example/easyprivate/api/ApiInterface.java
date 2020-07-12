@@ -7,6 +7,7 @@ import com.example.easyprivate.model.FilterGuru;
 import com.example.easyprivate.model.Jenjang;
 import com.example.easyprivate.model.MataPelajaran;
 import com.example.easyprivate.model.MidtransPembayaran;
+import com.example.easyprivate.model.Pembayaran;
 import com.example.easyprivate.model.PembayaranAbsen;
 import com.example.easyprivate.model.Pemesanan;
 import com.example.easyprivate.model.User;
@@ -61,8 +62,8 @@ public interface ApiInterface {
             @Field("id_mapel") Integer id_mapel,
             @Field("jenis_kelamin") String jenis_kelamin,
             @Field("hari[]" ) ArrayList<String> hari,
-            @Field("latitude_murid" ) Double latitude,
-            @Field("longitude_murid" ) Double longitude
+            @Field("latitude_murid") Double latitude,
+            @Field("longitude_murid") Double longitude
             );
     @GET("user/detail/{id}")
     Call<User> detailGuruById(
@@ -140,18 +141,33 @@ public interface ApiInterface {
             @Field("id_pemesanan") Integer id_pemesanan,
             @Field("bulan") Integer bulan,
             @Field("tahun") Integer tahun,
+            @Field("unpaid") String unpaid,
             @Field("distinct") String distinct
 
     );
     @FormUrlEncoded
-    @POST("midtrans/charge")
-    Call<ArrayList<MidtransPembayaran>> midtransCharge(
-            @Field("item_id[]") ArrayList<Integer>item_id,
-            @Field("item_price[]") ArrayList<Integer> item_price,
-            @Field("item_quantity[]") ArrayList<Integer> item_quantity,
-            @Field("item_name[]") ArrayList<Integer> item_name,
-            @Field("tahun") Integer tahun,
-            @Field("distinct") String distinct
+    @POST("pembayaran/filter")
+    Call<ArrayList<Pembayaran>> pembayaranSukses(
+            @Field("id_user") Integer id_user,
+            @Field("id_pembayaran") Integer id_pembayaran,
+            @Field("periode_bulan") Integer periode_bulan,
+            @Field("periode_tahun") Integer periode_tahun,
+            @Field("status") Integer status
+
+    );
+
+    @FormUrlEncoded
+    @POST("pembayaran/store")
+    Call<Void> pembayaranStore(
+            @Field("id_transaksi") String id_transaksi,
+            @Field("id_user") Integer id_user,
+            @Field("id_order") String id_order,
+            @Field("status") String status,
+            @Field("jumlah_bayar") Integer jumlah_bayar,
+            @Field("tanggal_bayar") String tanggal_bayar,
+            @Field("periode_bulan") Integer periode_bulan,
+            @Field("periode_tahun") Integer periode_tahun,
+            @Field("redirect_url") String redirect_url
 
     );
 
